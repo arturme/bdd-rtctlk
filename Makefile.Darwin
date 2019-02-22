@@ -1,0 +1,38 @@
+CC = g++
+CUDD_PATH = cudd
+CUDD_INCLUDE=cudd/lib/libcudd.a
+INCLUDES=-Icudd/include
+CPPFLAGS_SILENT = $(INCLUDES)
+CPPFLAGS = -Wall -Werror $(CPPFLAGS_SILENT) -DMEASURE -DNDEBUG -DBDD_TRANS_REORDER -DBDD_REORDER
+CXXFLAGS_SILENT = -O3 -g
+CXXFLAGS = $(CXXFLAGS_SILENT)
+LDLIBS = $(CUDD_INCLUDE)
+
+OBJ = automata.o mchecker.o mctools.o formula.o formula_ctlk.o iisin_driver.o iisin_parser.o
+
+all: main
+
+makefile.dep: *.cc *.hh
+	for i in *.cc; do g++ -MM "$${i}"; done > $@
+
+include makefile.dep
+
+iisin_parser.hh: iisin_parser.cc
+
+iisin_parser.cc: iisin_parser.yy
+	bison -o iisin_parser.cc iisin_parser.yy
+
+iisin_parser.o: iisin_parser.cc
+
+iisin_parser.lex.o: iisin_parser.lex.cc
+	$(CC) $(CXXFLAGS_SILENT) $(CPPFLAGS_SILENT) -c -o $@ iisin_parser.lex.cc
+
+iisin_parser.lex.cc: iisin_parser.ll
+	flex iisin_parser.ll
+	mv lex.yy.c iisin_parser.lex.cc
+
+main: main.o $(OBJ)
+
+clean:
+	rm -f *.o main
+
