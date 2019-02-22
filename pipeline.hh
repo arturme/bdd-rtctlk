@@ -1,10 +1,10 @@
-// 
+//
 //  pipeline.hh
 //  BDD-LTLK
-//  
+//
 //  Created by Artur Męski on 2011-01-17.
 //  Copyright 2011 VerICS Team. All rights reserved.
-// 
+//
 
 #ifndef PIPELINE_HH_FNQUVN9L
 #define PIPELINE_HH_FNQUVN9L

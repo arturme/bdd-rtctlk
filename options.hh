@@ -1,16 +1,17 @@
 #ifndef IISMC_OPTIONS_HH
 #define IISMC_OPTIONS_HH
 
-class Options {
+class Options
+{
 
-public:
+  public:
     unsigned int verbose;
     bool it_reorder;
 
     Options(void)
     {
-        verbose = 0;
-        it_reorder = false;
+      verbose = 0;
+      it_reorder = false;
     }
 };
 

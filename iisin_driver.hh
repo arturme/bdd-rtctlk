@@ -18,7 +18,7 @@ YY_DECL;
 // Conducting the whole scanning an parsing of RS
 class iisin_driver
 {
-public:
+  public:
     iisin_driver(SymAutomataNet *net);
     virtual ~iisin_driver();
 
@@ -38,20 +38,32 @@ public:
     bool trace_parsing;
 
     // IIS-specific
-    
+
     bool nosys;
 
     void pushAutomaton(const std::string &name);
-    void setCurInit(const std::string &name) {
-        cur_aut->setInitLocation(name);
+    void setCurInit(const std::string &name)
+    {
+      cur_aut->setInitLocation(name);
     }
-    void addCurTrans(const std::string &src, const std::string &dst, const std::string &name) {
-        cur_aut->addTransition(src, dst, name);
+    void addCurTrans(const std::string &src, const std::string &dst,
+                     const std::string &name)
+    {
+      cur_aut->addTransition(src, dst, name);
     }
-    void setCurAgent(int id) { cur_aut->setAgent(id); }
-    void closeNet(void) { net->closeNet(); }
+    void setCurAgent(int id)
+    {
+      cur_aut->setAgent(id);
+    }
+    void closeNet(void)
+    {
+      net->closeNet();
+    }
 
-    void addFormCTLK(FormCTLK *f) { ctlkform = f; }
+    void addFormCTLK(FormCTLK *f)
+    {
+      ctlkform = f;
+    }
     FormCTLK *getFormCTLK(void);
 
     // Error handling.

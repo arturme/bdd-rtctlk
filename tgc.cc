@@ -1,10 +1,10 @@
-// 
+//
 //  tgc.cc
 //  BDD-LTLK
-//  
+//
 //  Created by Artur Męski on 2011-01-17.
 //  Copyright 2011 VerICS Team. All rights reserved.
-// 
+//
 
 #include "tgc.hh"
 
@@ -20,15 +20,15 @@ main(int argc, char *argv[])
     }
 
     unsigned int nproc = atoi(argv[1]);
-    
+
     if (nproc < 2)
     {
         cerr << "There should be at least 2 trains!" << endl;
         return 1;
     }
-    
+
     unsigned int form_num = atoi(argv[2]);
-    
+
     cerr << "Benchmarking for (Faulty) Train Controller" << endl;
     cerr << "Number of trains = " << nproc << endl;
 
@@ -37,11 +37,11 @@ main(int argc, char *argv[])
 #endif
 
     SymAutomataNet san = genTGC(nproc);
-    
+
     cerr << "Network read" << endl;
     cerr << "Formula: " << flush;
     double genFormStartTime = cpuTime();
-    
+
     FormCTLK *form_ctlk = NULL;
     if (form_num == 1)
     {
@@ -62,14 +62,14 @@ main(int argc, char *argv[])
     else return 2;
 
     assert(form_ctlk != NULL);
-    
+
     cerr << "generated" << endl;
     double genFormTotalTime = cpuTime()-genFormStartTime;
-    
+
     boundedCheckCTLK(san, form_ctlk);
 
     //getAllReach(san);
-    
+
 #ifdef MEASURE
     double howLongTotal = cpuTime();
     int64 vm = memUsed();
@@ -84,43 +84,43 @@ main(int argc, char *argv[])
 string
 ccat_tgc(string a, int b)
 {
-	stringstream s;
-	s << a << b;
-	return s.str();
+  stringstream s;
+  s << a << b;
+  return s.str();
 }
 
 SymAutomataNet
 genTGC(unsigned int nproc)
 {
-    SymAutomataNet san;
- 
-    for (unsigned int i = 0; i < nproc; ++i)
-    {
-        Automaton train;
-        
-        train.setName(ccat_tgc("train_", i));
-        train.setAgent(i);
-        train.addTransition("away", "wait", ccat_tgc("approach_", i));
-        train.addTransition("wait", "tunnel", ccat_tgc("go_in_", i));
-        train.addTransition("tunnel", "away", ccat_tgc("go_out_", i));
-        train.setInitLocation("away");
-        san.addAutomaton(train);
-    }
-    
-    Automaton controller;
-    
-    controller.setName("controller");
-    controller.setAgent(nproc+10);
-    for (unsigned int i = 0; i < nproc; ++i)
-    {
-        controller.addTransition("green", "red", ccat_tgc("go_in_", i));
-        controller.addTransition("red", "green", ccat_tgc("go_out_", i));        
-    }
-    controller.setInitLocation("green");
-    san.addAutomaton(controller);
-    
-    san.closeNet();
-    
-    return san;
+  SymAutomataNet san;
+
+  for (unsigned int i = 0; i < nproc; ++i) {
+    Automaton train;
+
+    train.setName(ccat_tgc("train_", i));
+    train.setAgent(i);
+    train.addTransition("away", "wait", ccat_tgc("approach_", i));
+    train.addTransition("wait", "tunnel", ccat_tgc("go_in_", i));
+    train.addTransition("tunnel", "away", ccat_tgc("go_out_", i));
+    train.setInitLocation("away");
+    san.addAutomaton(train);
+  }
+
+  Automaton controller;
+
+  controller.setName("controller");
+  controller.setAgent(nproc + 10);
+
+  for (unsigned int i = 0; i < nproc; ++i) {
+    controller.addTransition("green", "red", ccat_tgc("go_in_", i));
+    controller.addTransition("red", "green", ccat_tgc("go_out_", i));
+  }
+
+  controller.setInitLocation("green");
+  san.addAutomaton(controller);
+
+  san.closeNet();
+
+  return san;
 }
 

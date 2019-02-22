@@ -43,7 +43,7 @@ class FormCTLK
     int left;
     int right;
     Agents agents;
-public:
+  public:
     FormCTLK(string aut, string loc);
     //FormCTLK(string varName, BDD varBDD);
     FormCTLK(bool val);
@@ -58,12 +58,12 @@ public:
     ~FormCTLK();
     unsigned int getAgent(void)
     {
-        assert(oper == CTLK_KD);
-        return agents[0];
+      assert(oper == CTLK_KD);
+      return agents[0];
     }
     Oper getOper(void) const
     {
-        return oper;
+      return oper;
     }
     bool hasOper(Oper op);
     void encodeAtoms(const SymAutomataNet *net);

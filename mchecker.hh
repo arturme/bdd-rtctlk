@@ -1,10 +1,10 @@
-// 
+//
 //  mchecker.hh
 //  BDD-LTLK
-//  
+//
 //  Created by Artur Meski on 2010-10-14.
 //  Copyright 2010 VerICS Team. All rights reserved.
-// 
+//
 
 #ifndef MCHECKER_HH_JWJDONJ1
 #define MCHECKER_HH_JWJDONJ1

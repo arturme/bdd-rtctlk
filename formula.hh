@@ -1,10 +1,10 @@
-// 
+//
 //  formula.hh
 //  BDD-LTLK
-//  
+//
 //  Created by Artur Meski on 2010-10-14.
 //  Copyright 2010 VerICS Team. All rights reserved.
-// 
+//
 
 #ifndef FORMULA_HH_1A3ODT83
 #define FORMULA_HH_1A3ODT83
@@ -56,7 +56,7 @@ class FormLTLK
     Agents agents;
     bool tf;
     bool isExistentialFormula;
-public:
+  public:
     FormLTLK(string varName, BDD varBDD);
     FormLTLK(Oper op, FormLTLK *form1);
     FormLTLK(Oper op, FormLTLK *form1, FormLTLK *form2);
@@ -76,19 +76,19 @@ public:
     bool getTruth(void);
     BDD *getBDD(void);
     unsigned int getAgent(void);
-	Agents *getAgentsPtr(void)
-	{
-		return &agents;
-	}
+    Agents *getAgentsPtr(void)
+    {
+      return &agents;
+    }
     void dropSubForm(void);
-	void reduce(void);
+    void reduce(void);
     void setExistential(bool existential)
     {
-        isExistentialFormula = existential;
-    }    
+      isExistentialFormula = existential;
+    }
     bool isExistential()
     {
-        return isExistentialFormula;
+      return isExistentialFormula;
     }
 };
 
@@ -96,15 +96,14 @@ typedef std::vector<FormLTLK *> FormLTLKvect;
 
 class FormLTLKset
 {
-    struct FormLTLKidx
-    {
-        FormLTLK *formula;
-        int idx;
+    struct FormLTLKidx {
+      FormLTLK *formula;
+      int idx;
     };
     typedef std::map<string, FormLTLKidx> FormLTLKstrMap;
     unsigned int nonPVcount;
     FormLTLKstrMap formSet;
-public:
+  public:
     FormLTLKset(void);
     void addForm(FormLTLK *form);
     void show(void);

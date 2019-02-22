@@ -1,10 +1,10 @@
-// 
+//
 //  tgc.hh
 //  BDD-LTLK
-//  
+//
 //  Created by Artur Męski on 2011-01-17.
 //  Copyright 2011 VerICS Team. All rights reserved.
-// 
+//
 
 #ifndef TGC_HH_2CYF81JD
 #define TGC_HH_2CYF81JD

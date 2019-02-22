@@ -1,8 +1,8 @@
-// 
+//
 //  mctools.hh
-//  
+//
 //  Created by Artur Meski on 2010-10-14.
-// 
+//
 
 #ifndef MCTOOLS_HH_AC4K84MQ
 #define MCTOOLS_HH_AC4K84MQ
@@ -18,11 +18,10 @@
 
 class VerTreeLTLK
 {
-    struct FormBDD
-    {
-        FormLTLK *form;
-        BDD *states;
-        int paramsId;
+    struct FormBDD {
+      FormLTLK *form;
+      BDD *states;
+      int paramsId;
     };
 
     typedef std::vector<FormBDD> VerTreeList;
@@ -32,7 +31,7 @@ class VerTreeLTLK
     bool picked;
 
     void addForm(FormLTLK *form);
-public:
+  public:
     VerTreeLTLK(FormLTLK *formLTLK);
     ~VerTreeLTLK(void);
     void prepVerTree(FormLTLK *form);
@@ -40,7 +39,7 @@ public:
     int getLastPickParams(void);
     void loadLastPickParams(void);
     void saveWithLastPick(const BDD &states);
-    BDD	getFormStates(string formStr);
+    BDD getFormStates(string formStr);
     void show(void);
     void cleanup(void);
 };
@@ -48,20 +47,19 @@ public:
 typedef std::vector<BDD> BDDset;
 typedef std::map<unsigned int, BDD> ExistBDDcache;
 
-struct ParamsLTLwSAN   /* Parameters for verification of LTL with SymAutomataNet */
-{
-    FormLTLK *form;
-    FormLTLKset *elemForm;
-    vector<BDD> *tabVars; /* zmienne tableau */
-    vector<BDD> *tabVars_succ;
-    BDD *tabVars_E;
-    vector<BDD> *pv; /* zmienne produktu */
-	vector<BDD> *pv_succ;
-    BDD *pv_E; /* BDD do kwantyfikacji dla produktu */
-    BDD *pv_succ_E;
-    BDD *prod_trans; /* relacja przejścia dla produktu */
-    BDDset *fairConstr;
-    FormLTLKvect *allXforms;
+struct ParamsLTLwSAN { /* Parameters for verification of LTL with SymAutomataNet */
+  FormLTLK *form;
+  FormLTLKset *elemForm;
+  vector<BDD> *tabVars; /* zmienne tableau */
+  vector<BDD> *tabVars_succ;
+  BDD *tabVars_E;
+  vector<BDD> *pv; /* zmienne produktu */
+  vector<BDD> *pv_succ;
+  BDD *pv_E; /* BDD do kwantyfikacji dla produktu */
+  BDD *pv_succ_E;
+  BDD *prod_trans; /* relacja przejścia dla produktu */
+  BDDset *fairConstr;
+  FormLTLKvect *allXforms;
 };
 
 typedef std::vector<ParamsLTLwSAN *> ParamsLTLbyForm;

@@ -1,10 +1,10 @@
-// 
+//
 //  automata.hh
 //  BDD-LTLK
-//  
+//
 //  Created by Artur Meski on 2010-10-14.
 //  Copyright 2010 VerICS Team. All rights reserved.
-// 
+//
 
 #ifndef AUTOMATA_HH_ZNJ05LFI
 #define AUTOMATA_HH_ZNJ05LFI
@@ -40,18 +40,16 @@ class Automaton
     typedef std::set<LocationId> LocationsSet;
     typedef string Action;
     typedef std::set<Action> Actions;
-    struct TransitionDst
-    {
-        Action action;
-        LocationId dstLoc;
+    struct TransitionDst {
+      Action action;
+      LocationId dstLoc;
     };
     typedef std::vector<TransitionDst> TransitionDsts;
     typedef std::map<LocationId, TransitionDsts> Transitions;
 
-    struct TransSrcDst
-    {
-        LocationId srcLoc;
-        LocationId dstLoc;
+    struct TransSrcDst {
+      LocationId srcLoc;
+      LocationId dstLoc;
     };
     typedef std::vector<TransSrcDst> AllTransSrcDst;
     typedef std::map<Action, AllTransSrcDst> TransByActions;
@@ -75,12 +73,12 @@ class Automaton
 
     bool hasLocation(string name);
 
-public:
+  public:
     Automaton(void);
     void setName(string name);
     string getName(void) const
     {
-        return automatonName;
+      return automatonName;
     }
     void addLocation(string name);
     void addGreenLocation(string name);
@@ -88,7 +86,7 @@ public:
     void showLocations(void);
     std::map<string, string> getValuations() const
     {
-        return valuations;
+      return valuations;
     }
     unsigned int countLocations(void);
     LocationId getLocationId(string name) const;
@@ -112,14 +110,13 @@ class SymAutomataNet
 {
     typedef std::vector<Automaton> Automata;
     typedef std::map<string, AutIdx> AutomataByName;
-    struct BDDenc
-    {
-        vector<BDD> *pv;
-        vector<BDD> *pv_succ;
-        BDD *pv_E;
-        BDD *pv_succ_E;
-        unsigned int numVars;
-        unsigned int varBegin;
+    struct BDDenc {
+      vector<BDD> *pv;
+      vector<BDD> *pv_succ;
+      BDD *pv_E;
+      BDD *pv_succ_E;
+      unsigned int numVars;
+      unsigned int varBegin;
     };
     typedef std::vector<BDDenc> AutomataBDDenc;
     typedef std::map<Automaton::Action, VectAutIdx> ActionsToAut;
@@ -148,9 +145,10 @@ class SymAutomataNet
     typedef std::map<Automaton::AgentId, VectAutIdx> AgentAutomata;
 
     AgentAutomata agentAutomata;
-    
-    void addValuationsForAutomaton(string automatonNameA,  std::map<string,string> valuations);
-public:
+
+    void addValuationsForAutomaton(string automatonNameA,
+                                   std::map<string, string> valuations);
+  public:
     SymAutomataNet(void);
     Cudd *getCuddMgr(void);
     void closeNet(void);
@@ -174,7 +172,10 @@ public:
     unsigned int getAutomatonIndexBegin(unsigned int i);
     unsigned int getAutomatonIndexBound(unsigned int i);
     AutIdx getAutomatonId(string automatonName) const;
-    Automata getAutomata() const { return automata; }
+    Automata getAutomata() const
+    {
+      return automata;
+    }
     VectAutIdx getAgentAutomata(Automaton::AgentId agent);
     void makeAutAgent(Automaton::AgentId agent_id, string automaton);
     bool isAutInAgent(Automaton::AgentId agent_id, string automaton);
@@ -188,8 +189,8 @@ public:
 // Macros
 #define ASSUME_NOT_EMPTY(varname, what) \
 if (varname == "") { \
-	cout << __FILE__ <<  " (function " << __func__ << "), line " << __LINE__ << "; Empty string given: " << what << endl; \
-	exit(1); \
+  cout << __FILE__ <<  " (function " << __func__ << "), line " << __LINE__ << "; Empty string given: " << what << endl; \
+  exit(1); \
 }
 
 #define ASSUME_NET_IS_CLOSED assert(netIsClosed);
